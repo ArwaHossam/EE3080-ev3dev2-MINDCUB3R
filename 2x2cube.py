@@ -21,13 +21,22 @@ class ScanError(Exception):
 
 
 class MindCuber(object):
-    scan_order = [
-        5, 9, 6, 3, 2, 1, 4, 7, 8,
-        23, 27, 24, 21, 20, 19, 22, 25, 26,
-        50, 54, 51, 48, 47, 46, 49, 52, 53,
-        14, 10, 13, 16, 17, 18, 15, 12, 11,
-        41, 43, 44, 45, 42, 39, 38, 37, 40,
-        32, 34, 35, 36, 33, 30, 29, 28, 31]
+    # scan_order = [
+    #     5, 9, 6, 3, 2, 1, 4, 7, 8,
+    #     23, 27, 24, 21, 20, 19, 22, 25, 26,
+    #     50, 54, 51, 48, 47, 46, 49, 52, 53,
+    #     14, 10, 13, 16, 17, 18, 15, 12, 11,
+    #     41, 43, 44, 45, 42, 39, 38, 37, 40,
+    #     32, 34, 35, 36, 33, 30, 29, 28, 31]
+
+        scan_order = [
+        4, 3, 1, 2,
+        12, 10, 9, 11,
+        24, 22, 21, 23,
+        5, 7, 8, 6,
+        19, 20, 18, 17,
+        15, 16, 14, 13
+    ]
 
     hold_cube_pos = 85
     rotate_speed = 400
@@ -41,7 +50,6 @@ class MindCuber(object):
         self.colorarm = MediumMotor(OUTPUT_C)
         self.color_sensor = ColorSensor()
         self.color_sensor.mode = self.color_sensor.MODE_RGB_RAW
-        #self.infrared_sensor = InfraredSensor()
         self.infrared_sensor = UltrasonicSensor()
         self.init_motors()
         self.state = ['U', 'D', 'F', 'L', 'B', 'R']
@@ -477,7 +485,7 @@ class MindCuber(object):
                 break
 
             #dist = self.infrared_sensor.proximity
-            dist = self.infrared_sensor.distance_centimeters()
+            dist = self.infrared_sensor.distance_centimeters
 
             # It is odd but sometimes when the cube is inserted
             # the IR sensor returns a value of 100...most of the
@@ -487,7 +495,7 @@ class MindCuber(object):
                 log.info("wait for cube...distance %d, present for %d/%d" %
                          (dist, rubiks_present, rubiks_present_target))
             else:
-                if rubiks_present:
+                if, rubiks_present:
                     log.info('wait for cube...cube removed (%d)' % dist)
                 rubiks_present = 0
 
