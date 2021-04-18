@@ -27,7 +27,18 @@ ssh robot@ev3dev.local
 - Ensure you already run all the neccessary installations in the prerequisite part.
 - Run in the SSH terminal:
 ```.bash
-./mindcuber.py
+./3x3cube.py
 ```
 - The solver script takes quite a while to run. Be patient! While running, your terminal will print out which step it is on like below:
 - ![ev3dev2 running](./img/ev3dev2run.png)
+
+## Miscellaneous
+- The code for 2x2 cube is still under development and there is no stable version yet.
+- So far, these modifications need to be done for 2x2:
+    + Change scan_cube order (already did)
+    Platform holder: no change needed. The shape is still cubic, so the topology is the same with 45 and 90 degrees movements. The sizing for the 2x2 cube is smaller, so the Hardware subteam helped out with designing a smaller platform with the same gear ratio to hold the smaller 2x2 cube.
+    + Flipper arm: since my code instructs the flipper arm to “go all the way until stopped by an object”, it will still be able to touch the smaller 2x2 cube. Hardware team also helped to insert a horizontal bar at the flipper tip to hold the smaller 2x2 cube.
+    + Color sensor motor: changes need to be made as now the code does not read “center tile, corner tile and edge tile” similar to the 3x3 cube anymore. The 2x2 rubik's cube now only has 4 corner tiles without any center nor edge tile. The matrix used to save the tile color values is also different in shape compared to the 3×3 cube.
+    + Color sensor: no change, as there are still 6 same colors belonging to 6 faces of the cube.
+    + Ultrasonic sensor: increase the distance between the sensor and the cube to 8cm, as the 2x2 cube is smaller so the distance should be larger.
+
