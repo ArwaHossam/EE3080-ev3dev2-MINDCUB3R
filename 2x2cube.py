@@ -28,7 +28,8 @@ class MindCuber(object):
     #     14, 10, 13, 16, 17, 18, 15, 12, 11,
     #     41, 43, 44, 45, 42, 39, 38, 37, 40,
     #     32, 34, 35, 36, 33, 30, 29, 28, 31]
-
+    
+    # Different scan orders for each tile
         scan_order = [
         4, 3, 1, 2,
         12, 10, 9, 11,
